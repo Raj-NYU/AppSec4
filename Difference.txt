@@ -5,7 +5,11 @@ Part 2.1
 3) Implicit intent is shown between lines 69-73 > var intent = Intent(Intent.ACTION_VIEW)
 4) Explicit intent is shown between lines 68-70 > var intent = Intent(activity, ProductScrollingActivity::class.java)
 5) Between these two intents the proper way to do an intent is done within ThirdFragment.kt as this is the explicit intent. On line 68, ProductScrollingPage is passed to deliver the explicit intent activity (var intent = Intent(activity, ProductScrollingActivity::class.java)) which is only passed within the application.
+Fixing intents) I removed the implicit intent within the SecondFragment.kt file and added var intent = Intent(activity, ProductScrollingActivity::class.java) this line instead.
 
-Part 2.2) To fix the incorrect intent I added permission restrictions to the AndroidManifest.xml file. Then I removed the implicit intent within the SecondFragment.kt file and added var intent = Intent(activity, ProductScrollingActivity::class.java) this line instead.
+Part 2.2) 
+To fix the incorrect intent I added permission restrictions to the AndroidManifest.xml file.
+I also commented out all the implicit intent filters within the XML file to comply with the company requirements and removed the implicit intents filter within mainactivity as this is not a vulnerability outside of the application.
 
-
+Resource Used:
+https://developer.android.com/guide/topics/manifest/permission-element

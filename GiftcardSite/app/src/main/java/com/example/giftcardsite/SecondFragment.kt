@@ -66,7 +66,7 @@ class SecondFragment : Fragment() {
                         loggedInUser = response.body()
                         Log.d("Register Success", "Register success. Boo.")
                         Log.d("Register Success", "Token:" + loggedInUser?.token.toString())
-                        // Part 2.2: Removing implicit intent and adding explicit intent
+                        // Part 2.1 Fixing Intents: Removing implicit intent and adding explicit intent
                         var intent = Intent(activity, ProductScrollingActivity::class.java)
                         intent.type = "text/giftcards_browse"
                         intent.data = Uri.parse("https://appsec.moyix.net/api/index")
