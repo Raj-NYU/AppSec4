@@ -4,12 +4,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--Part 2.2: Adding permission restrictions to prevent application accessing the outside world-->
-    <permission android:name="GiftCardSite_Permissions" android:protectionLevel="signature" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!--<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>-->
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
 
 
 
@@ -25,7 +23,6 @@
             android:name=".UseCard"
             android:label="@string/title_activity_use_card"
             android:theme="@style/Theme.GiftcardSite.NoActionBar">
-            <!-- Part 2.2 Commenting out Intent Filter
             <intent-filter>
             <action android:name="android.intent.action.VIEW" />
 
@@ -35,13 +32,11 @@
                 <data android:scheme="giftcard" />
                 <data android:host="appsec.moyix.net"/>
             </intent-filter>
-            -->
         </activity>
         <activity
             android:name=".GetCard"
             android:label="@string/title_activity_get_card"
             android:theme="@style/Theme.GiftcardSite.NoActionBar">
-            <!-- Part 2.2 Commenting out intent filter
             <intent-filter>
             <action android:name="android.intent.action.VIEW" />
 
@@ -51,13 +46,11 @@
                 <data android:scheme="giftcard" />
                 <data android:host="appsec.moyix.net"/>
             </intent-filter>
-            -->
         </activity>
         <activity
             android:name=".ProductScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/Theme.GiftcardSite.NoActionBar">
-            <!-- Part 2.2 Commenting out intent filter
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -67,22 +60,21 @@
                 <data android:scheme="giftcard" />
                 <data android:host="appsec.moyix.net"/>
             </intent-filter>
-            -->
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.GiftcardSite.NoActionBar">
-            <!-- Part 2.2 Removed intent filter and left main because this is not a vulnerabilty outside of the application.-->
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".CardScrollingActivity"
             android:label="@string/title_activity_scrolling_card"
             android:theme="@style/Theme.GiftcardSite.NoActionBar">
-            <!-- Part 2.2 Commenting out intent filter
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -92,7 +84,6 @@
                 <data android:scheme="giftcard" />
                 <data android:host="appsec.moyix.net"/>
             </intent-filter>
-            -->
         </activity>
     </application>
 
