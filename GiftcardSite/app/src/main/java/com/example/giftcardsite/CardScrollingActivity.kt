@@ -29,7 +29,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class CardScrollingActivity : AppCompatActivity(), SensorEventListener, LocationListener {
+abstract class CardScrollingActivity : AppCompatActivity(), SensorEventListener, LocationListener {
     private var loggedInUser : User? = null
     private lateinit var sensorManager: SensorManager
     private var mAccel: Sensor? = null;
