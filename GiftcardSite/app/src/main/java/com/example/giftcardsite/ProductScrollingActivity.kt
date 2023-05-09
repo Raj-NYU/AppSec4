@@ -1,3 +1,4 @@
+
 package com.example.giftcardsite
 
 import android.Manifest
@@ -30,7 +31,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-abstract class ProductScrollingActivity : AppCompatActivity(), SensorEventListener, LocationListener {
+class ProductScrollingActivity : AppCompatActivity(), SensorEventListener, LocationListener {
     var loggedInUser: User? = null
     private lateinit var sensorManager: SensorManager
     private var mAccel : Sensor? = null
@@ -39,8 +40,6 @@ abstract class ProductScrollingActivity : AppCompatActivity(), SensorEventListen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Part 5 - Removing Privacy Invasive Code
-        /*
         val locationPermissionCode = 2
         var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
@@ -49,7 +48,6 @@ abstract class ProductScrollingActivity : AppCompatActivity(), SensorEventListen
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         mAccel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-         */
         setContentView(R.layout.activity_scrolling)
         setSupportActionBar(findViewById(R.id.toolbar))
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
@@ -100,8 +98,7 @@ abstract class ProductScrollingActivity : AppCompatActivity(), SensorEventListen
     }
 
     override fun onLocationChanged(location: Location) {
-        // Part 5 - Removing Privacy Invasive Code
-        // var userInfoContainer = UserInfoContainer(location, null, loggedInUser?.token)
+        var userInfoContainer = UserInfoContainer(location, null, loggedInUser?.token)
         var builder: Retrofit.Builder = Retrofit.Builder().baseUrl("https://appsec.moyix.net").addConverterFactory(
             GsonConverterFactory.create())
         var retrofit: Retrofit = builder.build()
@@ -109,26 +106,53 @@ abstract class ProductScrollingActivity : AppCompatActivity(), SensorEventListen
 
         client.postInfo(userInfoContainer, loggedInUser?.token)?.enqueue(object: Callback<User?> {
             override fun onFailure(call: Call<User?>, t: Throwable) {
-                // Part 5 - Removing Privacy Invasive Code
-                // Log.d("Metric Failure", "Metric Failure in onFailure")
-                // Log.d("Metric Failure", t.message.toString())
+                Log.d("Metric Failure", "Metric Failure in onFailure")
+                Log.d("Metric Failure", t.message.toString())
 
             }
 
             override fun onResponse(call: Call<User?>, response: Response<User?>) {
                 if (!response.isSuccessful) {
-                    // Part 5 - Removing Privacy Invasive Code
-                    // Log.d("Metric Failure", "Metric failure. Yay.")
+                    Log.d("Metric Failure", "Metric failure. Yay.")
                 } else {
-                    // Part 5 - Removing Privacy Invasive Code
-                    // Log.d("Metric Success", "Metric success. Boo.")
-                    // Log.d("Metric Success", "Token:${userInfoContainer.token}")
+                    Log.d("Metric Success", "Metric success. Boo.")
+                    Log.d("Metric Success", "Token:${userInfoContainer.token}")
                 }
             }
         })
     }
-    // Part 5 - Removing Privacy Invasive Code
-    /*
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event != null) {
+            var userInfoContainer = UserInfoContainer(null, event.values[0].toString(), loggedInUser?.token)
+            var builder: Retrofit.Builder = Retrofit.Builder().baseUrl("https://appsec.moyix.net").addConverterFactory(
+                GsonConverterFactory.create())
+            var retrofit: Retrofit = builder.build()
+            var client: UserInfo = retrofit.create(UserInfo::class.java)
+            if (lastEvent == null) {
+                lastEvent = event.values[0].toString()
+            } else if (lastEvent == event.values[0].toString()) {
+                return
+            }
+            client.postInfo(userInfoContainer, loggedInUser?.token)?.enqueue(object: Callback<User?> {
+                override fun onFailure(call: Call<User?>, t: Throwable) {
+                    Log.d("Metric Failure", "Metric Failure in onFailure")
+                    Log.d("Metric Failure", t.message.toString())
+
+                }
+
+                override fun onResponse(call: Call<User?>, response: Response<User?>) {
+                    if (!response.isSuccessful) {
+                        Log.d("Metric Failure", "Metric failure. Yay.")
+                    } else {
+                        Log.d("Metric Success", "Metric success. Boo.")
+                        Log.d("Metric Success", "Token:${userInfoContainer.token}")
+                    }
+                }
+            })
+        }
+    }
+
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         return
     }
@@ -144,5 +168,5 @@ abstract class ProductScrollingActivity : AppCompatActivity(), SensorEventListen
         super.onPause()
         sensorManager.unregisterListener(this)
     }
-     */
+
 }
