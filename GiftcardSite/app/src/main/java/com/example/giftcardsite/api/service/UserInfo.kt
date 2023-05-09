@@ -8,6 +8,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface UserInfo {
-    @POST("/api/metrics")
-    fun postInfo(@Body info: UserInfoContainer, @Header("Authorization") token: String?) : Call<User>
+    // Part 5 - Removing Privacy Invasive Code
+    // @POST("/api/metrics")
+    // fun postInfo(@Body info: UserInfoContainer, @Header("Authorization") token: String?) : Call<User>
 }
