@@ -37,8 +37,6 @@ abstract class CardScrollingActivity : AppCompatActivity(), SensorEventListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        mAccel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         setContentView(R.layout.activity_scrolling)
         setSupportActionBar(findViewById(R.id.toolbar))
         loggedInUser = intent.getParcelableExtra<User>("User")
@@ -64,20 +62,13 @@ abstract class CardScrollingActivity : AppCompatActivity(), SensorEventListener,
         client.getCards(token)?.enqueue(object :
             Callback<List<Card?>?> {
             override fun onFailure(call: Call<List<Card?>?>, t: Throwable) {
-                Log.d("Product Failure", "Product Failure in onFailure")
-                Log.d("Product Failure", t.message.toString())
-
             }
 
             override fun onResponse(call: Call<List<Card?>?>, response: Response<List<Card?>?>) {
                 if (!response.isSuccessful) {
-                    Log.d("Product Failure", "Product failure. Yay.")
                 }
                 var cardListInternal = response.body()
-                Log.d("Product Success", "Product Success. Boo.")
                 if (cardListInternal == null) {
-                    Log.d("Product Failure", "Parsed null product list")
-                    Log.d("Product Failure", response.toString())
                 } else {
                     recyclerView.adapter =
                         CardRecyclerViewAdapter(outerContext, cardListInternal, loggedInUser)
