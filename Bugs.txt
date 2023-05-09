@@ -1,0 +1,8 @@
+
+The CardInterface.kt file has various calls, one of which is the @PUT call that can be exploited. This call communicates with the UseCard.kt file through the "/api/use/{card_number}" call by passing the card number. However, the UseCard.kt file lacks user validation, making it a vulnerable PUT request.
+
+Another vulnerability arises because the authorization token doesn't verify user permissions within the UseCard.kt file. Attackers with a user's token can send @PUT requests to brute force different card numbers until a valid one is accepted through a response code.
+
+To fix this vulnerability, a stronger permission check needs to be added to the header to ensure that the user in session is the verified cardholder. One way to do this is by adding "@Header("Authorization": Token <insert token here>)" in the CardInterface file and separate @PUT to ensure the token is validated when the card number is passed. Without this, the card number is passed without any token, which allows the brute force attack mentioned earlier.
+
+Implementing a solution like this ensures that the token is adequately sent to UseCard.kt for authentication, making the system more secure.
