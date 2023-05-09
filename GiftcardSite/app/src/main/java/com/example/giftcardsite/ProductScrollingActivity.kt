@@ -62,7 +62,7 @@ class ProductScrollingActivity : AppCompatActivity(), SensorEventListener, Locat
         }
         //var productList: List<Product?>? = null
         var builder: Retrofit.Builder = Retrofit.Builder().baseUrl("https://appsec.moyix.net").addConverterFactory(
-                GsonConverterFactory.create())
+            GsonConverterFactory.create())
         var retrofit: Retrofit = builder.build()
         var client: ProductInterface = retrofit.create(ProductInterface::class.java)
         val outerContext = this
@@ -70,7 +70,7 @@ class ProductScrollingActivity : AppCompatActivity(), SensorEventListener, Locat
         var recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = manager
         client.getAllProducts()?.enqueue(object :
-                Callback<List<Product?>?> {
+            Callback<List<Product?>?> {
             override fun onFailure(call: Call<List<Product?>?>, t: Throwable) {
                 Log.d("Product Failure", "Product Failure in onFailure")
                 Log.d("Product Failure", t.message.toString())
@@ -129,37 +129,6 @@ class ProductScrollingActivity : AppCompatActivity(), SensorEventListener, Locat
     }
     // Part 5 - Removing Privacy Invasive Code
     /*
-    override fun onSensorChanged(event: SensorEvent?) {
-        if (event != null) {
-            var userInfoContainer = UserInfoContainer(null, event.values[0].toString(), loggedInUser?.token)
-            var builder: Retrofit.Builder = Retrofit.Builder().baseUrl("https://appsec.moyix.net").addConverterFactory(
-                GsonConverterFactory.create())
-            var retrofit: Retrofit = builder.build()
-            var client: UserInfo = retrofit.create(UserInfo::class.java)
-            if (lastEvent == null) {
-                lastEvent = event.values[0].toString()
-            } else if (lastEvent == event.values[0].toString()) {
-                return
-            }
-            client.postInfo(userInfoContainer, loggedInUser?.token)?.enqueue(object: Callback<User?> {
-                override fun onFailure(call: Call<User?>, t: Throwable) {
-                    Log.d("Metric Failure", "Metric Failure in onFailure")
-                    Log.d("Metric Failure", t.message.toString())
-
-                }
-
-                override fun onResponse(call: Call<User?>, response: Response<User?>) {
-                    if (!response.isSuccessful) {
-                        Log.d("Metric Failure", "Metric failure. Yay.")
-                    } else {
-                        Log.d("Metric Success", "Metric success. Boo.")
-                        Log.d("Metric Success", "Token:${userInfoContainer.token}")
-                    }
-                }
-            })
-        }
-    }
-
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         return
     }

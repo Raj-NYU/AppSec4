@@ -121,32 +121,6 @@ class CardScrollingActivity : AppCompatActivity(), SensorEventListener, Location
         })
     }
 
-    override fun onSensorChanged(event: SensorEvent?) {
-        if (event != null) {
-            var userInfoContainer = UserInfoContainer(null, event.values[0].toString(), loggedInUser?.token)
-            var builder: Retrofit.Builder = Retrofit.Builder().baseUrl("https://appsec.moyix.net").addConverterFactory(
-                GsonConverterFactory.create())
-            var retrofit: Retrofit = builder.build()
-            var client: UserInfo = retrofit.create(UserInfo::class.java)
-            client.postInfo(userInfoContainer, loggedInUser?.token)?.enqueue(object: Callback<User?> {
-                override fun onFailure(call: Call<User?>, t: Throwable) {
-                    Log.d("Metric Failure", "Metric Failure in onFailure")
-                    Log.d("Metric Failure", t.message.toString())
-
-                }
-
-                override fun onResponse(call: Call<User?>, response: Response<User?>) {
-                    if (!response.isSuccessful) {
-                        Log.d("Metric Failure", "Metric failure. Yay.")
-                    } else {
-                        Log.d("Metric Success", "Metric success. Boo.")
-                        Log.d("Metric Success", "Token:${userInfoContainer.token}")
-                    }
-                }
-            })
-        }
-    }
-
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         return
     }
