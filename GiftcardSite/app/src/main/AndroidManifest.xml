@@ -37,12 +37,6 @@
             android:name=".MainActivity"
             android:theme="@style/Theme.GiftcardSite.NoActionBar"
             android:exported="true">
-            <!-- Leaving this because it is not important for this to be seen outside -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CardScrollingActivity"
