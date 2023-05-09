@@ -3,7 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
+    <permission
+        android:name="GiftCardSite_Permissions"
+        android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
