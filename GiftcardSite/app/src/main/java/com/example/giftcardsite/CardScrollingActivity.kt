@@ -31,8 +31,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 abstract class CardScrollingActivity : AppCompatActivity(), SensorEventListener, LocationListener {
     private var loggedInUser: User? = null
-    private lateinit var sensorManager: SensorManager
-    private var mAccel: Sensor? = null;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,16 +46,8 @@ abstract class CardScrollingActivity : AppCompatActivity(), SensorEventListener,
             }
             startActivity(intent)
         }
-        var builder: Retrofit.Builder =
-            Retrofit.Builder().baseUrl("https://appsec.moyix.net").addConverterFactory(
-                GsonConverterFactory.create()
-            )
-        var retrofit: Retrofit = builder.build()
-        var client: CardInterface = retrofit.create(CardInterface::class.java)
-        val outerContext = this
         var manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         var recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val token = "Token ${loggedInUser?.token}"
         recyclerView.layoutManager = manager
     }
 }
