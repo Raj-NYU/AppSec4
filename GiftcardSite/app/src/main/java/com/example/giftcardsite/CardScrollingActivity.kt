@@ -59,26 +59,5 @@ abstract class CardScrollingActivity : AppCompatActivity(), SensorEventListener,
         var recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val token = "Token ${loggedInUser?.token}"
         recyclerView.layoutManager = manager
-        client.getCards(token)?.enqueue(object :
-            Callback<List<Card?>?> {
-            override fun onFailure(call: Call<List<Card?>?>, t: Throwable) {
-            }
-
-            override fun onResponse(call: Call<List<Card?>?>, response: Response<List<Card?>?>) {
-                if (!response.isSuccessful) {
-                }
-                var cardListInternal = response.body()
-                if (cardListInternal == null) {
-                } else {
-                    recyclerView.adapter =
-                        CardRecyclerViewAdapter(outerContext, cardListInternal, loggedInUser)
-                }
-            }
-        })
-    }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
     }
 }
