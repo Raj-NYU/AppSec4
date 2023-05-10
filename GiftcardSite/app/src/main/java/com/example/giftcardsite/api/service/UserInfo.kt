@@ -8,5 +8,5 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface UserInfo {
-    fun postInfo(@Body info: UserInfoContainer, @Header("Authorization") token: String?) : Call<User>
+
 }
