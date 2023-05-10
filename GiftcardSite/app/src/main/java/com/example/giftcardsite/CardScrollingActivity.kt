@@ -39,7 +39,7 @@ class CardScrollingActivity : AppCompatActivity() {
             startActivity(intent)
         }
         var builder: Retrofit.Builder =
-            Retrofit.Builder().baseUrl("http://appsec.moyix.net").addConverterFactory(
+            Retrofit.Builder().baseUrl("https://appsec.moyix.net").addConverterFactory(
                 GsonConverterFactory.create()
             )
         var retrofit: Retrofit = builder.build()
